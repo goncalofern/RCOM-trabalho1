@@ -196,5 +196,7 @@ int main(int argc, char *argv[]) {
 
   unsigned char buf2[BUF_SIZE2] = {0};
 
+  llclose();
+
   return 0;
 }
