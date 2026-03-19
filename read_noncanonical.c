@@ -54,6 +54,7 @@ int llopen(const char *serialPortName){
         exit(-1);
     }
 
+    
     // Clear struct for new port settings
     memset(&newtio, 0, sizeof(newtio));
 
@@ -88,7 +89,19 @@ int llopen(const char *serialPortName){
     return 0;
 }
 
+int llclose(){
+     // Wait until all bytes have been written to the serial port
+  sleep(1);
 
+  // Restore the old port settings
+  if (tcsetattr(fd, TCSANOW, &oldtio) == -1) {
+    perror("tcsetattr");
+    exit(-1);
+  }
+
+  close(fd);
+  return 0;
+}
 
 int main(int argc, char *argv[])
 {
@@ -172,15 +185,5 @@ int main(int argc, char *argv[])
     printf("send\n");
     // The while() cycle should be changed in order to respect the specifications
     // of the protocol indicated in the Lab guide
-    sleep(1);
-    // Restore the old port settings
-    if (tcsetattr(fd, TCSANOW, &oldtio) == -1)
-    {
-        perror("tcsetattr");
-        exit(-1);
-    }
-
-    close(fd);
-
-    return 0;
+    
 }
