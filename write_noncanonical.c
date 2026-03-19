@@ -24,7 +24,7 @@
 #define BUF_SIZE2 1000
 
 int fd;
-
+//teste
 struct termios oldtio;
 struct termios newtio;
 
@@ -99,6 +99,7 @@ int llclose() {
   }
 
   close(fd);
+  return 0;
 }
 volatile int STOP = FALSE;
 
